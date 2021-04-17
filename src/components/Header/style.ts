@@ -1,25 +1,33 @@
-import { makeStyles } from '@material-ui/core/styles'
 import { createStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
 import { ITheme } from '../../themes/types'
 
 export const useAppHeaderStyles = makeStyles(
 	(theme: ITheme) =>
 		createStyles({
+			appbar: {
+				zIndex: theme.zIndex.drawer + 1
+			},
 			toolbar: {
 				justifyContent: 'space-between'
 			},
+			titleContainer: {
+				display: 'flex',
+				alignItems: 'center'
+			},
 			title: {
-				letterSpacing: 0.7,
-				flexGrow: 1,
-				color: '#fff',
+				fontSize: 'large',
+				fontWeight: 500,
+				color: theme.palette.primary.contrastText,
 				textDecoration: 'none',
 				[theme.breakpoints.up('sm')]: {
 					display: 'block'
 				}
 			},
 			themeToggleButton: {
-				background: theme.cfg.Header.background,
-				border: theme.cfg.Header.border,
+				background: theme.cfg.Header.toggler.background,
+				border: theme.cfg.Header.toggler.border,
 				borderRadius: 30,
 				width: '4%',
 				padding: '5px 10px',
@@ -38,6 +46,24 @@ export const useAppHeaderStyles = makeStyles(
 				'& svg:nth-child(2)': {
 					transform:
 						theme.name === 'light' ? 'translateX(0)' : 'translateX(-100px)'
+				}
+			},
+			menuButton: {
+				marginRight: 36
+			},
+			hide: {
+				display: 'none'
+			},
+			saveButton: {
+				textTransform: 'none',
+				marginRight: 20,
+				minWidth: 95,
+				height: 35,
+				boxShadow: 'none',
+				border: `1px solid ${theme.palette.primary.contrastText}`,
+				'& .MuiFab-label': {
+					display: 'flex',
+					justifyContent: 'space-between'
 				}
 			}
 		}),

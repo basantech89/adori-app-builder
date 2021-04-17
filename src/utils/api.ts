@@ -1,6 +1,7 @@
 import axios from 'axios'
+
 import store from '../store'
-import { showLoader, hideLoader } from '../store/state/common'
+import { hideLoader, showLoader } from '../store/state/common'
 
 declare interface IMetaConfig {
 	loadingMessage?: string
@@ -15,7 +16,7 @@ const constructUrl = (url: string) => {
 
 export const get = async <K>(
 	url: string,
-	headers?: object,
+	headers?: Record<string, unknown>,
 	metaConfig: IMetaConfig = { loadingMessage: '' }
 ) => {
 	try {
@@ -33,8 +34,8 @@ export const get = async <K>(
 
 export const post = async <K>(
 	url: string,
-	postData: Object,
-	headers?: object
+	postData: Record<string, unknown>,
+	headers?: Record<string, unknown>
 ) => {
 	try {
 		const { data } = await axios.post(constructUrl(url), postData, {
@@ -46,7 +47,10 @@ export const post = async <K>(
 	}
 }
 
-export const remove = async <K>(url: string, headers?: object) => {
+export const remove = async <K>(
+	url: string,
+	headers?: Record<string, unknown>
+) => {
 	try {
 		const { data } = await axios.delete(constructUrl(url), {
 			headers: headers
@@ -59,8 +63,8 @@ export const remove = async <K>(url: string, headers?: object) => {
 
 export const patch = async <K>(
 	url: string,
-	patchData: Object,
-	headers?: object
+	patchData: Record<string, unknown>,
+	headers?: Record<string, unknown>
 ) => {
 	try {
 		const { data } = await axios.patch(constructUrl(url), patchData, {
@@ -74,8 +78,8 @@ export const patch = async <K>(
 
 export const formPost = async <K>(
 	url: string,
-	formPostData: object,
-	headers?: Object
+	formPostData: Record<string, unknown>,
+	headers?: Record<string, unknown>
 ) => {
 	try {
 		const bodyFormData = new FormData()

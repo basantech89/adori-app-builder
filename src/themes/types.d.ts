@@ -1,7 +1,7 @@
 import { Theme, ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 
 export interface ThemeCfgOption {
-	[k: string]: string | number
+	[k: string]: any
 }
 
 export interface ThemeCfg {

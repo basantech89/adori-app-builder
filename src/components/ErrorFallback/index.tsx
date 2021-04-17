@@ -1,5 +1,6 @@
 import React from 'react'
 import { FallbackProps } from 'react-error-boundary'
+
 import { useErrorFallbackStyles } from './style'
 
 const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {

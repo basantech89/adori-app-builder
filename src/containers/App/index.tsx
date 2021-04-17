@@ -1,19 +1,20 @@
 import React from 'react'
-import Layout from './Layout'
-import Routes from './Routes'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Provider } from 'react-redux'
-import store from '../../store'
+
 import ErrorFallback from '../../components/ErrorFallback'
+import { GlobalProvider } from '../../GlobalStates'
+import store from '../../store'
+import Layout from './Layout'
 
 const App: React.FC = () => {
 	return (
 		<Provider store={store}>
-			<ErrorBoundary FallbackComponent={ErrorFallback}>
-				<Layout>
-					<Routes />
-				</Layout>
-			</ErrorBoundary>
+			<GlobalProvider>
+				<ErrorBoundary FallbackComponent={ErrorFallback}>
+					<Layout />
+				</ErrorBoundary>
+			</GlobalProvider>
 		</Provider>
 	)
 }

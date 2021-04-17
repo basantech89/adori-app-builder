@@ -1,4 +1,4 @@
-# Adori Labs
+# Adori Labs Apps Builder
 
 ## Tech Stack
 
