@@ -51,9 +51,6 @@ export const useAppHeaderStyles = makeStyles(
 			menuButton: {
 				marginRight: 36
 			},
-			hide: {
-				display: 'none'
-			},
 			saveButton: {
 				textTransform: 'none',
 				marginRight: 20,
@@ -61,6 +58,32 @@ export const useAppHeaderStyles = makeStyles(
 				height: 35,
 				boxShadow: 'none',
 				border: `1px solid ${theme.palette.primary.contrastText}`,
+				'& .MuiFab-label': {
+					display: 'flex',
+					justifyContent: 'space-between'
+				}
+			},
+			cancelButton: {
+				textTransform: 'none',
+				marginRight: 20,
+				minWidth: 95,
+				height: 35,
+				boxShadow: 'none',
+				border: `1px solid ${theme.palette.primary.main}`,
+				backgroundColor: theme.palette.primary.contrastText,
+				'& .MuiFab-label': {
+					display: 'flex',
+					justifyContent: 'space-between'
+				}
+			},
+			resetButton: {
+				textTransform: 'none',
+				marginRight: 20,
+				minWidth: 95,
+				height: 35,
+				boxShadow: 'none',
+				border: `1px solid ${theme.palette.secondary.contrastText}`,
+				backgroundColor: theme.palette.secondary.main,
 				'& .MuiFab-label': {
 					display: 'flex',
 					justifyContent: 'space-between'

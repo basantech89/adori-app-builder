@@ -1,24 +1,25 @@
 import { makeStyles } from '@material-ui/core'
 
-import theme from '../../themes/light'
-
 type TemplateStyles = {
 	templateWidth: number
-	bgColor: string
 }
 
 const useTemplateStyles = makeStyles(() => ({
 	root: (props: TemplateStyles) => ({
 		width: props.templateWidth,
-		backgroundColor: props.bgColor,
+		backgroundColor: '#fff',
 		overflow: 'auto',
 		padding: 24,
-		margin: '0 auto'
+		margin: '0 auto',
+		border: '1px solid rgba(196, 196, 196, 0.5)'
 	}),
+	mediaCard: {
+		margin: 16
+	},
 	showName: {
 		fontWeight: 'bold'
 	},
-	showDescription: {
+	showEpisodes: {
 		opacity: 0.5
 	},
 	shareIcon: {

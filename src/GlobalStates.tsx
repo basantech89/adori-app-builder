@@ -16,7 +16,7 @@ export const GlobalProvider: React.FC = (props) => {
 	const [drawerOpen, setDrawerOpen] = React.useState(false)
 	const toggleDrawerOpen = () => setDrawerOpen(!drawerOpen)
 
-	const [templateWidth, setTemplateWidth] = React.useState(ScreenWidth.Phone)
+	const [templateWidth, setTemplateWidth] = React.useState(ScreenWidth.Laptop)
 	const changeTemplateWidth = (screenType: ScreenType) => {
 		switch (screenType) {
 			case ScreenType.Phone:

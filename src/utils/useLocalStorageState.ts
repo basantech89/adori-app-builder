@@ -4,7 +4,7 @@ type TDefaultValueFunction = () => string
 
 export function useLocalStorageState(
 	key: string,
-	defaultValue: string | boolean | number | TDefaultValueFunction,
+	defaultValue: string | boolean | number | unknown | TDefaultValueFunction,
 	{ serialize = JSON.stringify, deserialize = JSON.parse } = {}
 ) {
 	const [state, setState] = React.useState(() => {

@@ -3,6 +3,7 @@ import React from 'react'
 
 import Header from '../../components/Header'
 import light from '../../themes/light'
+import { AdoriThemeProvider } from '../Home/AdoriTemplateThemeProvider'
 import CustomizationDrawer from '../Home/CustomizationDrawer'
 import Routes from './Routes'
 
@@ -21,11 +22,13 @@ const Layout: React.FC = () => {
 
 	return (
 		<ThemeProvider theme={light}>
-			<div style={{ display: 'flex' }}>
-				<Header />
-				<CustomizationDrawer />
-				<Routes />
-			</div>
+			<AdoriThemeProvider>
+				<div style={{ display: 'flex' }}>
+					<Header />
+					<CustomizationDrawer />
+					<Routes />
+				</div>
+			</AdoriThemeProvider>
 		</ThemeProvider>
 	)
 }

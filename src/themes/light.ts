@@ -1,5 +1,6 @@
 import { createMuiTheme } from '@material-ui/core'
 
+import { AdoriThemeOptions } from '../types'
 import colors from './colors'
 import { IThemeOptions } from './types'
 
@@ -12,8 +13,7 @@ const extended = {
 	}
 }
 
-const theme = createMuiTheme({
-	name: 'light',
+export const lightThemeOptions: AdoriThemeOptions = {
 	palette: {
 		type: 'light',
 		common: colors.common,
@@ -50,7 +50,12 @@ const theme = createMuiTheme({
 				textTransform: 'none'
 			}
 		}
-	},
+	}
+}
+
+const theme = createMuiTheme({
+	name: 'light',
+	...lightThemeOptions,
 	cfg: extended
 } as IThemeOptions)
 

@@ -4,10 +4,12 @@ import {
 	CardActionArea,
 	CardContent,
 	CardMedia,
+	Fab,
 	makeStyles,
 	Typography
 } from '@material-ui/core'
-import { PlayCircleFilled } from '@material-ui/icons'
+import { PlayArrow } from '@material-ui/icons'
+import clsx from 'clsx'
 import React from 'react'
 
 export const useCardStyles = makeStyles((theme) => ({
@@ -18,12 +20,12 @@ export const useCardStyles = makeStyles((theme) => ({
 	}),
 	content: {
 		backgroundColor: theme.palette.secondary.main,
-		color: 'white'
+		color: theme.palette.secondary.contrastText,
+		minHeight: 78,
+		boxSizing: 'border-box'
 	},
 	playIcon: {
-		width: 48,
-		height: 48,
-		paddingRight: 8
+		marginRight: 12
 	},
 	footerTitle: {
 		maxWidth: 166,
@@ -41,13 +43,14 @@ declare interface MediaCardProps {
 	footerButton: React.ReactNode
 	footerTitle: string
 	maxWidth: number
+	className?: string
 }
 
 const MediaCard: React.FC<MediaCardProps> = (props) => {
 	const classes = useCardStyles({ maxWidth: props.maxWidth })
 
 	return (
-		<Card className={classes.card}>
+		<Card className={clsx(classes.card, props.className)}>
 			<CardActionArea>
 				<CardMedia
 					image={props.imgSrc}
@@ -62,7 +65,14 @@ const MediaCard: React.FC<MediaCardProps> = (props) => {
 						justifyContent='space-between'
 					>
 						<Box display='flex' alignItems='center'>
-							<PlayCircleFilled color='primary' className={classes.playIcon} />
+							<Fab
+								color='primary'
+								aria-label='play episode'
+								className={classes.playIcon}
+								size='small'
+							>
+								<PlayArrow />
+							</Fab>
 							<Typography className={classes.footerTitle} variant='subtitle1'>
 								{props.footerTitle}
 							</Typography>
