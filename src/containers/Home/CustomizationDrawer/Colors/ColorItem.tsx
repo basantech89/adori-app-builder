@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: ITheme) => ({
 	}
 }))
 
-const ColorItem: React.FC<ColorItemProps> = React.memo((props) => {
+const ColorItem: React.FC<ColorItemProps> = (props) => {
 	const { templateTheme } = useAdoriTemplateTheme()
 	const paletteOption = props.id.split('-')[1] as keyof AdoriPalette
 	const paletteColorOption = props.id.split('-')[0] as keyof PaletteColorOptions
@@ -81,7 +81,7 @@ const ColorItem: React.FC<ColorItemProps> = React.memo((props) => {
 
 	const [color, setColor] = React.useState<string>(defaultColor)
 
-	const classes = useStyles({ color })
+	const classes = useStyles({ color: defaultColor })
 
 	const popover: any = React.useRef(null)
 
@@ -117,6 +117,6 @@ const ColorItem: React.FC<ColorItemProps> = React.memo((props) => {
 			<ListItemText primary={props.itemText} />
 		</ListItem>
 	)
-})
+}
 
 export default ColorItem

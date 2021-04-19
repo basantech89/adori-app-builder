@@ -78,10 +78,7 @@ export const AdoriThemeProvider: React.FC = (props) => {
 	const changeColorTemporary = (payload: AdoriColor) =>
 		setTemporaryThemeOptions({ type: 'color', payload })
 
-	const templateTheme = React.useMemo(
-		() => createMuiTheme(temporaryThemeOptions),
-		[temporaryThemeOptions]
-	)
+	const templateTheme = createMuiTheme(temporaryThemeOptions)
 
 	const applyChanges = () => setPermanentThemeOptions(temporaryThemeOptions)
 
