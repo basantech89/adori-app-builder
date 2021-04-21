@@ -75,8 +75,11 @@ export const AdoriThemeProvider: React.FC = (props) => {
 	const changeTypographyTemporary = (payload: Partial<TypographyOptions>) =>
 		setTemporaryThemeOptions({ type: 'typography', payload })
 
-	const changeColorTemporary = (payload: AdoriColor) =>
-		setTemporaryThemeOptions({ type: 'color', payload })
+	const changeColorTemporary = React.useCallback(
+		(payload: AdoriColor) =>
+			setTemporaryThemeOptions({ type: 'color', payload }),
+		[]
+	)
 
 	const templateTheme = createMuiTheme(temporaryThemeOptions)
 

@@ -1,27 +1,21 @@
-import {
-	Box,
-	ListItem,
-	ListItemText,
-	makeStyles,
-	useTheme
-} from '@material-ui/core'
+import { ListItem, ListItemText, makeStyles } from '@material-ui/core'
 import { PaletteColorOptions } from '@material-ui/core/styles/createPalette'
 import clsx from 'clsx'
 import React from 'react'
-import { RgbaStringColorPicker } from 'react-colorful'
 
+import ColorPicker from '../../../../components/ColorPicker'
 import useGlobalStates from '../../../../GlobalStates'
 import { ITheme } from '../../../../themes/types'
 import { AdoriPalette } from '../../../../types'
-import useClickOutside from '../../../../utils/hooks/useClickOutside'
 import useAdoriTemplateTheme from '../../AdoriTemplateThemeProvider'
 
 declare interface ColorItemProps {
 	className: string
-	handleClick: () => void
+	handleClick: (event: any) => void
 	itemText: string
-	id: string
 	defaultColor?: string
+	paletteOption: string
+	paletteColorOption: string
 }
 
 const useStyles = makeStyles((theme: ITheme) => ({
@@ -71,30 +65,21 @@ const useStyles = makeStyles((theme: ITheme) => ({
 	}
 }))
 
-const ColorItem: React.FC<ColorItemProps> = (props) => {
+const ColorItem: React.FC<ColorItemProps> = React.memo((props) => {
 	const { templateTheme } = useAdoriTemplateTheme()
-	const paletteOption = props.id.split('-')[1] as keyof AdoriPalette
-	const paletteColorOption = props.id.split('-')[0] as keyof PaletteColorOptions
+
+	const paletteOption = props.paletteOption as keyof AdoriPalette
+	const paletteColorOption = props.paletteColorOption as keyof PaletteColorOptions
 	const defaultColor =
 		templateTheme.palette[paletteOption][paletteColorOption] ||
 		'rgba(255, 255, 255, 1)'
 
-	const [color, setColor] = React.useState<string>(defaultColor)
+	const handleChangeColor = (color: string) =>
+		changeColorTemporary({ paletteOption, paletteColorOption, value: color })
 
 	const classes = useStyles({ color: defaultColor })
 
-	const popover: any = React.useRef(null)
-
-	const [pickerOpened, setPickerOpened] = React.useState(false)
-	const openPicker = () => setPickerOpened(true)
-	const closePicker = React.useCallback(() => setPickerOpened(false), [])
-	useClickOutside(popover, closePicker)
-
 	const { changeColorTemporary } = useAdoriTemplateTheme()
-	const handleChangeColor = (color: string) => {
-		setColor(color)
-		changeColorTemporary({ paletteOption, paletteColorOption, value: color })
-	}
 
 	const { drawerOpen } = useGlobalStates()
 
@@ -104,19 +89,16 @@ const ColorItem: React.FC<ColorItemProps> = (props) => {
 				[classes.itemOpened]: drawerOpen,
 				[classes.itemClosed]: !drawerOpen
 			})}
+			datai-id={`${paletteOption}-${paletteColorOption}`}
 			onClick={props.handleClick}
 		>
-			<Box position='relative' mr={4}>
-				<button className={classes.swatch} onClick={openPicker} />
-				{pickerOpened && (
-					<div className={classes.popover} ref={popover}>
-						<RgbaStringColorPicker color={color} onChange={handleChangeColor} />
-					</div>
-				)}
-			</Box>
+			<ColorPicker
+				defaultColor={defaultColor}
+				handleChangeColor={handleChangeColor}
+			/>
 			<ListItemText primary={props.itemText} />
 		</ListItem>
 	)
-}
+})
 
 export default ColorItem

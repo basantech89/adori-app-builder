@@ -1,12 +1,5 @@
 import { AppBar, Box, Fab, IconButton, Toolbar } from '@material-ui/core'
-import {
-	Block,
-	Cancel,
-	CancelOutlined,
-	CancelRounded,
-	Clear,
-	RotateLeft
-} from '@material-ui/icons'
+import { Clear, RotateLeft } from '@material-ui/icons'
 import MenuIcon from '@material-ui/icons/Menu'
 import SaveAltIcon from '@material-ui/icons/SaveAlt'
 import { Link } from '@reach/router'

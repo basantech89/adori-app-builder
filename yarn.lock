@@ -11641,6 +11641,11 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+use-debouncy@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/use-debouncy/-/use-debouncy-4.1.1.tgz#23155075cc0b0ab35f1da5b24941a64b45e7e273"
+  integrity sha512-2EKITeYz6SHWhctKPk6irvrtUXv7c2WjgDNdMNhLS0+CD+fNv+0BDRSzeHIFjdzWCVtPRlc7/QnEnN/6JzD/4w==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

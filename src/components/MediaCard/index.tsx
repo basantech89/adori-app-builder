@@ -12,6 +12,8 @@ import { PlayArrow } from '@material-ui/icons'
 import clsx from 'clsx'
 import React from 'react'
 
+import useTraceUpdate from '../../utils/hooks/useTraceUpdate'
+
 export const useCardStyles = makeStyles((theme) => ({
 	card: ({ maxWidth }: { maxWidth: number }) => ({
 		boxSizing: 'content-box',
@@ -40,14 +42,15 @@ export const useCardStyles = makeStyles((theme) => ({
 
 declare interface MediaCardProps {
 	imgSrc: string
-	footerButton: React.ReactNode
 	footerTitle: string
 	maxWidth: number
 	className?: string
+	footerBtn: React.ReactNode
 }
 
-const MediaCard: React.FC<MediaCardProps> = (props) => {
+const MediaCard: React.FC<MediaCardProps> = React.memo((props) => {
 	const classes = useCardStyles({ maxWidth: props.maxWidth })
+	useTraceUpdate(props, 'MediaCard')
 
 	return (
 		<Card className={clsx(classes.card, props.className)}>
@@ -77,12 +80,12 @@ const MediaCard: React.FC<MediaCardProps> = (props) => {
 								{props.footerTitle}
 							</Typography>
 						</Box>
-						{props.footerButton}
+						{props.footerBtn}
 					</Box>
 				</CardContent>
 			</CardActionArea>
 		</Card>
 	)
-}
+})
 
 export default MediaCard

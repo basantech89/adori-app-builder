@@ -17,8 +17,23 @@ const Home: React.FC = () => {
 	const { templateTheme } = useAdoriTemplateTheme()
 
 	const classes = useTemplateStyles({
-		templateWidth
+		templateWidth,
+		maxWidth: 327
 	})
+
+	const mediaCardFooterBtn = React.useMemo(
+		() => (
+			<Fab
+				color='primary'
+				aria-label='share album'
+				size='small'
+				className={classes.shareIcon}
+			>
+				<ShareRounded />
+			</Fab>
+		),
+		[]
+	)
 
 	return (
 		<ThemeProvider theme={templateTheme}>
@@ -29,7 +44,7 @@ const Home: React.FC = () => {
 						footerTitle='Play latest'
 						maxWidth={444}
 						className={classes.mediaCard}
-						footerButton={
+						footerBtn={
 							<Button size='large' variant='contained' color='primary'>
 								Subscribe
 							</Button>
@@ -52,22 +67,13 @@ const Home: React.FC = () => {
 				/>
 				<Typography variant='h6'> Episodes </Typography>
 				<Box display='flex' flexDirection='row' flexWrap='wrap' m='0 -10px'>
-					{episodes.map((episode: any) => (
+					{episodes.map((episode: typeof template.episodes[0]) => (
 						<MediaCard
 							key={episode.uid}
 							imgSrc={episode.image.originalUrl}
 							maxWidth={327}
-							footerButton={
-								<Fab
-									color='primary'
-									aria-label='share album'
-									size='small'
-									className={classes.shareIcon}
-								>
-									<ShareRounded />
-								</Fab>
-							}
 							footerTitle={startWithUpperCase(episode.name)}
+							footerBtn={mediaCardFooterBtn}
 						/>
 					))}
 				</Box>

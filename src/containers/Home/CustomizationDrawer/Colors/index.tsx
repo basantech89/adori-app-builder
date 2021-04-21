@@ -18,11 +18,8 @@ import React from 'react'
 
 import useGlobalStates from '../../../../GlobalStates'
 import { ITheme } from '../../../../themes/types'
-import {
-	Customizations,
-	CustomizationsAction,
-	CustomizePaletteOption
-} from '../types.d'
+import useTraceUpdate from '../../../../utils/hooks/useTraceUpdate'
+import { Customizations, CustomizationsAction } from '../types.d'
 import ColorItem from './ColorItem'
 
 const customizationsReducer = (
@@ -100,17 +97,15 @@ const Colors = () => {
 		initialCustomizations
 	)
 
-	const toggleDropdown = React.useCallback(
-		(payload: keyof CustomizePaletteOption) => () =>
-			dispatchCustomizations({ type: 'colors', payload }),
-		[]
-	)
+	const toggleDropdown = React.useCallback((event) => {
+		dispatchCustomizations({ type: 'colors', payload: event.target.dataset.id })
+	}, [])
 
 	const { drawerOpen } = useGlobalStates()
 
 	return (
 		<>
-			<ListItem button onClick={toggleDropdown('colors')}>
+			<ListItem data-id='colors' button onClick={toggleDropdown}>
 				<ListItemIcon>
 					<ColorLensTwoTone color='primary' />
 				</ListItemIcon>
@@ -121,11 +116,12 @@ const Colors = () => {
 				<List>
 					<ListItem
 						button
+						data-id='primary'
 						className={clsx({
 							[classes.itemOpened]: drawerOpen,
 							[classes.itemClosed]: !drawerOpen
 						})}
-						onClick={toggleDropdown('primary')}
+						onClick={toggleDropdown}
 					>
 						<ListItemIcon>
 							<OpacityTwoTone color='primary' />
@@ -141,15 +137,17 @@ const Colors = () => {
 						<List component='div' disablePadding>
 							<ColorItem
 								className={classes.nested}
-								handleClick={toggleDropdown('mainPrimary')}
+								handleClick={toggleDropdown}
 								itemText='Main'
-								id='main-primary'
+								paletteOption='primary'
+								paletteColorOption='main'
 							/>
 							<ColorItem
 								className={classes.nested}
-								handleClick={toggleDropdown('contrastTextPrimary')}
+								handleClick={toggleDropdown}
 								itemText='Text'
-								id='contrastText-primary'
+								paletteOption='primary'
+								paletteColorOption='contrastText'
 							/>
 						</List>
 					</Collapse>
@@ -159,7 +157,8 @@ const Colors = () => {
 							[classes.itemOpened]: drawerOpen,
 							[classes.itemClosed]: !drawerOpen
 						})}
-						onClick={toggleDropdown('secondary')}
+						data-id='secondary'
+						onClick={toggleDropdown}
 					>
 						<ListItemIcon>
 							<InvertColorsTwoTone color='primary' />
@@ -175,15 +174,17 @@ const Colors = () => {
 						<List component='div' disablePadding>
 							<ColorItem
 								className={classes.nested}
-								handleClick={toggleDropdown('mainSecondary')}
+								handleClick={toggleDropdown}
 								itemText='Main'
-								id='main-secondary'
+								paletteOption='secondary'
+								paletteColorOption='main'
 							/>
 							<ColorItem
 								className={classes.nested}
-								handleClick={toggleDropdown('contrastTextSecondary')}
+								handleClick={toggleDropdown}
 								itemText='Text'
-								id='contrastText-secondary'
+								paletteOption='secondary'
+								paletteColorOption='contrastText'
 							/>
 						</List>
 					</Collapse>
