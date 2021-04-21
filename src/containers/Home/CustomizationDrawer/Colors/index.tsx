@@ -98,7 +98,10 @@ const Colors = () => {
 	)
 
 	const toggleDropdown = React.useCallback((event) => {
-		dispatchCustomizations({ type: 'colors', payload: event.target.dataset.id })
+		dispatchCustomizations({
+			type: 'colors',
+			payload: event.currentTarget.dataset.id
+		})
 	}, [])
 
 	const { drawerOpen } = useGlobalStates()

@@ -51,7 +51,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 	const [color, setColor] = React.useState<string>(
 		defaultColor || 'rgba(255, 255, 255, 1)'
 	)
-	const classes = useStyles({ color })
+	const classes = useStyles({ color: defaultColor })
 
 	const popover: any = React.useRef(null)
 	const [pickerOpened, setPickerOpened] = React.useState(false)
